@@ -34,25 +34,32 @@ public class Vuelo {
     public String getIdentificador() {
         return identificador;
     }
+
     public String getCiudadOrigen() {
         return ciudadOrigen;
     }
+
     public String getCiudadDestino() {
         return ciudadDestino;
     }
+
     public double getPrecio() {
         return precio;
     }
+
     public int getNumMaxPasajeros() {
         return numMaxPasajeros;
     }
+
     public int getNumActualPasajeros() {
         return numActualPasajeros;
     }
+
     //obtenemos el pasajero por medio del indice
     public Pasajero getPasajero(int i) {
         return listaPasajeros[i];
     }
+
     //obtenemos el indice del pasajero por medio del pasaporte
     public Pasajero getPasajero(String pasaporte) {
         boolean encontrado = false;
@@ -64,6 +71,7 @@ public class Vuelo {
             }
         }
         return pas;
+
     }
 }
 

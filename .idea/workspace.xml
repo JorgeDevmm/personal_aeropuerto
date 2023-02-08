@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4eea3d82-1ff0-469d-b889-adc8a6d5f505" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Proyecto/AeropuertoPrivado.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Proyecto/AeropuertoPublico.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Proyecto/Principal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Proyecto/AeropuertoPrivado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Proyecto/AeropuertoPrivado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Proyecto/Compania.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Proyecto/Compania.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Proyecto/Vuelo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Proyecto/Vuelo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,16 +33,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Jorge/Proyectos/Java-proyectos/personal_aeropuerto&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;fileTemplates&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "F:/Jorge/Proyectos/Java-proyectos/personal_aeropuerto",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Color Scheme Font"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -51,7 +55,11 @@
       <workItem from="1674773153496" duration="3597000" />
       <workItem from="1674836742285" duration="3456000" />
       <workItem from="1674841517945" duration="778000" />
-      <workItem from="1674866817746" duration="3664000" />
+      <workItem from="1674866817746" duration="4345000" />
+      <workItem from="1675565744973" duration="3614000" />
+      <workItem from="1675623521737" duration="1091000" />
+      <workItem from="1675624638919" duration="1638000" />
+      <workItem from="1675794085600" duration="9773000" />
     </task>
     <servers />
   </component>
@@ -68,5 +76,19 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Proyecto/Principal.java</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -7,7 +7,7 @@ package Proyecto;
 public class Compania {
     private String nombre;
     private Vuelo listaVuelos[] = new Vuelo[10];
-    private int numVuelo  = 0;
+    private int numVuelo = 0;
 
     //constructor
     public Compania(String nombre) {
@@ -22,7 +22,7 @@ public class Compania {
     }
 
     //getters
-    public void insertarVuelo(Vuelo vuelo){
+    public void insertarVuelo(Vuelo vuelo) {
         listaVuelos[numVuelo] = vuelo;
         numVuelo++;
     }
@@ -34,12 +34,14 @@ public class Compania {
     public int getNumVuelo() {
         return numVuelo;
     }
+
     //introducimos la el numero de vuelo
-    public Vuelo getVuelo(int i){
+    public Vuelo getVuelo(int i) {
         return listaVuelos[i];
     }
+
     //introducimos por identificador
-    public Vuelo getVuelo(String id){
+    public Vuelo getVuelo(String id) {
         boolean encontrado = false;
         Vuelo v = null;
         for (int i = 0; i < listaVuelos.length; i++) {
