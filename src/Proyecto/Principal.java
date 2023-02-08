@@ -31,6 +31,7 @@ que dicha compañia ofrece, mostrando su indentificador, la ciudad origen y dest
 package Proyecto;
 
 import java.nio.file.attribute.AclFileAttributeView;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 /**
@@ -95,9 +96,10 @@ public class Principal {
     }
 
     public static void menu() {
-        String nombreAeropuerto;
+        String nombreAeropuerto, nombreCompania;//variable que usaremos para validar si existen
         int opcion;
         Aeropuerto aeropuertoEncontrado;
+        Compania companiaEncontrado;
         do {
             System.out.println("\t.:MENU:.");
             System.out.println("1. Ver Aeropuertos gestionados(Publicos o Privados)");
@@ -122,7 +124,7 @@ public class Principal {
                     break;
                 case 3://"3. Listar compañias de un Aeropuerto"
                     System.out.println("");
-                    System.out.println("Ingresar el nombre del Aeropuerto");
+                    System.out.println("Ingresar el nombre del Aeropuerto:");
                     entrada.nextLine();//limpiar buffer
                     nombreAeropuerto = entrada.nextLine();
                     aeropuertoEncontrado = buscarAeropuerto(nombreAeropuerto, aeropuertos);//almacenamos el objeto de tipo Aeropuerto que retorna del método en la variable aeropuertoEncontrado
@@ -133,6 +135,18 @@ public class Principal {
                     }
                     break;
                 case 4://"4. Listar Vuelos por Compañia"
+                    entrada.nextLine();
+                    System.out.println("\nDigite el nombre del Aeropuerto:");
+                    nombreAeropuerto = entrada.nextLine();
+                    aeropuertoEncontrado = buscarAeropuerto(nombreAeropuerto, aeropuertos);//almacenamos el objeto de tipo Aeropuerto que retorna del método en la variable aeropuertoEncontrado
+                    if (aeropuertoEncontrado == null) {
+                        System.out.println("Aeropuerto no existe");
+                    } else {
+                        System.out.println("Ingresar el nombre de la Compania:");
+                        nombreCompania = entrada.nextLine();
+                        companiaEncontrado = aeropuertoEncontrado.getCompania(nombreCompania);//obtenemos el la compania por método get compania
+                        mostrarVuelos(companiaEncontrado);
+                    }
                     break;
                 case 5://"5. Listar Posibles Vuelos de Origen a Destino"
                     break;
@@ -194,7 +208,17 @@ public class Principal {
         System.out.println("\nLas Companias del Aeropuerto: " + aeropuertoEncontrado.getNombre());
         //recorrerar la cantidad de compánia que exista en getNumCompania
         for (int i = 0; i < aeropuertoEncontrado.getNumCompania(); i++) {
-            System.out.println(aeropuertoEncontrado.getCompania(i).getNombre());//accediendo al interador de compania y por el el método getNombre
+            System.out.println(aeropuertoEncontrado.getCompania(i).getNombre());//accediendo al interador de com
+
+        }
+    }
+
+    public static void mostrarVuelos(Compania companiaEncontrado) {
+        System.out.println("\nLas Vuelos de las compania " + companiaEncontrado.getNombre() + " son: ");
+        //Recorrer el arreglo de vuelos del objeto compania
+        for (int i = 0; i < companiaEncontrado.getNumVuelo(); i++) {
+            System.out.println(companiaEncontrado.getVuelo(i).toString());//Accediendo al iterador del vuelo por getVuelo y mostrar los datos con toString
+
         }
     }
 }

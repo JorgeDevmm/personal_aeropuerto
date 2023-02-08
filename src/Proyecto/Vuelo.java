@@ -71,7 +71,13 @@ public class Vuelo {
             }
         }
         return pas;
+    }
 
+    public String toString() {
+        return "\nidentificador = " + identificador +
+                "\nciudadOrigen = " + ciudadOrigen +
+                "\nciudadDestino = " + ciudadDestino +
+                "\nprecio = " + precio;
     }
 }
 
