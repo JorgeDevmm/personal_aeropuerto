@@ -30,8 +30,6 @@ que dicha compañia ofrece, mostrando su indentificador, la ciudad origen y dest
 * */
 package Proyecto;
 
-import java.nio.file.attribute.AclFileAttributeView;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 /**
