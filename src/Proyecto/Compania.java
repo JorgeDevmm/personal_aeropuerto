@@ -43,12 +43,14 @@ public class Compania {
     //introducimos por identificador
     public Vuelo getVuelo(String id) {
         boolean encontrado = false;
+        int i = 0;
         Vuelo v = null;
-        for (int i = 0; i < listaVuelos.length; i++) {
+        while ((!encontrado) && (i < listaVuelos.length)) {
             if (id.equals(listaVuelos[i].getIdentificador())) {
                 encontrado = true;
                 v = listaVuelos[i];
             }
+            i++;
         }
         return v;
     }

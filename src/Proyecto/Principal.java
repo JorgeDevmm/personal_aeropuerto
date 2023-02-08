@@ -30,6 +30,7 @@ que dicha compañia ofrece, mostrando su indentificador, la ciudad origen y dest
 * */
 package Proyecto;
 
+import java.nio.file.attribute.AclFileAttributeView;
 import java.util.Scanner;
 
 /**
@@ -39,13 +40,21 @@ import java.util.Scanner;
 public class Principal {
     static Scanner entrada = new Scanner(System.in);
     final static int num = 4;//número de aeropuertos
-    static Aeropuerto aeropuerto[] = new Aeropuerto[num];
+    static Aeropuerto aeropuertos[] = new Aeropuerto[num];
 
 
     public static void main(String[] args) {
 
-        //insertar datos de los aeropuertos
-        insertarDatosAeropuerto(aeropuerto);
+        try {
+            //insertar datos de los aeropuertos
+            insertarDatosAeropuerto(aeropuertos);
+            menu();
+        } catch (NullPointerException exception) {
+            String mensaje = exception.getMessage();
+            exception.printStackTrace();
+        }
+
+
     }
 
     //método para insertar datos de los aeropuerto
@@ -56,9 +65,9 @@ public class Principal {
         aero[0].insertarCompania(new Compania("LATAM"));
         aero[0].getCompania("AeroPeru").insertarVuelo(new Vuelo("IB20", "lima", "Mexico", 150.90, 150));
         aero[0].getCompania("AeroPeru").insertarVuelo(new Vuelo("IB21", "lima", "Buenos Aires", 180.90, 120));
-        aero[0].getCompania("LATAM").insertarVuelo(new Vuelo("FC12", "lima", "lodres", 500.90, 180));
+        aero[0].getCompania("LATAM").insertarVuelo(new Vuelo("FC12", "lima", "londres", 500.90, 180));
         aero[0].getCompania("AeroPeru").getVuelo("IB20").insertarPasajero(new Pasajero("jorge", "x4510", "peruana"));
-        aero[0].getCompania("AeroPeru").getVuelo("IB20").insertarPasajero(new Pasajero("Andrea", "x4512", "ucraniana"));
+        aero[0].getCompania("AeroPeru").getVuelo("IB21").insertarPasajero(new Pasajero("Andrea", "x4512", "ucraniana"));
         aero[0].getCompania("LATAM").getVuelo("FC12").insertarPasajero(new Pasajero("luis", "E6710", "Colombiano"));
 
         aero[1] = new AeropuertoPrivado("Central Ciudad Real", "Central Real", "España");
@@ -76,18 +85,19 @@ public class Principal {
         aero[2].getCompania("AirAmerica").insertarVuelo(new Vuelo("AE031", "Bogota", "Lima", 150.90, 120));
         aero[2].getCompania("AirAmerica").getVuelo("AE030").insertarPasajero(new Pasajero("Julian", "x4510", "peruana"));
         aero[2].getCompania("AirAmerica").getVuelo("AE031").insertarPasajero(new Pasajero("Max", "x4512", "Colombiana"));
-        aero[2] = new AeropuertoPublico("Aeropuerto Bogota", "bogota", "Colombia", 2000000);
 
         aero[3] = new AeropuertoPublico("Aeropuerto Mexico", "Ciudad de Mexico", "Mexico", 4000000);
         aero[3].insertarCompania(new Compania("AeroMexico"));//como no tenemos creado una compania, lo creamos en al momento
         aero[3].getCompania("AeroMexico").insertarVuelo(new Vuelo("IB2040", "Ciudad de Mexico", "lima", 270.90, 130));
         aero[3].getCompania("AeroMexico").insertarVuelo(new Vuelo("IB2040", "Ciudad de Mexico", "Bogota", 450.90, 110));
-        aero[3].getCompania("AeroMexico").getVuelo("AE030").insertarPasajero(new Pasajero("Marina", "r2412", "Mexicana"));
+        aero[3].getCompania("AeroMexico").getVuelo("IB2040").insertarPasajero(new Pasajero("Marina", "r2412", "Mexicana"));
 
     }
 
     public static void menu() {
+        String nombreAeropuerto;
         int opcion;
+        Aeropuerto aeropuertoEncontrado;
         do {
             System.out.println("\t.:MENU:.");
             System.out.println("1. Ver Aeropuertos gestionados(Publicos o Privados)");
@@ -97,14 +107,30 @@ public class Principal {
             System.out.println("5. Listar Posibles Vuelos de Origen a Destino");
             System.out.println("6. Salir");
 
+            System.out.println("");
+            System.out.print("Ingresar opcion:");
             opcion = entrada.nextInt();
 
             switch (opcion) {
                 case 1://"1. Ver Aeropuertos gestionados(Publicos o Privados)"
+                    System.out.println("");
+                    mostrarDatosAeropuertos(aeropuertos);
                     break;
                 case 2://"2. Ver Empresas(Privado) o Subvencion(Publico)"
+                    System.out.println("");
+                    mostrarPatrocinioEmpresas(aeropuertos);
                     break;
                 case 3://"3. Listar compañias de un Aeropuerto"
+                    System.out.println("");
+                    System.out.println("Ingresar el nombre del Aeropuerto");
+                    entrada.nextLine();//limpiar buffer
+                    nombreAeropuerto = entrada.nextLine();
+                    aeropuertoEncontrado = buscarAeropuerto(nombreAeropuerto, aeropuertos);//almacenamos el objeto de tipo Aeropuerto que retorna del método en la variable aeropuertoEncontrado
+                    if (aeropuertoEncontrado == null) {
+                        System.out.println("Aeropuerto no existe");
+                    } else {//si existe el aeropuerto invocara al otro método
+                        mostrarCompanias(aeropuertoEncontrado);
+                    }
                     break;
                 case 4://"4. Listar Vuelos por Compañia"
                     break;
@@ -118,5 +144,57 @@ public class Principal {
             }
             System.out.println("");
         } while (opcion != 6);
+    }
+
+    public static void mostrarDatosAeropuertos(Aeropuerto aeropuertos[]) {
+        for (int i = 0; i < aeropuertos.length; i++) {
+            if (aeropuertos[i] instanceof AeropuertoPrivado) {//válida con instancef mi objeto esta instanciado con el tipo de un objeto
+                System.out.println("AeropuertoPrivado");
+                System.out.println(aeropuertos[i].toString());
+            } else {
+                System.out.println("AeropuertoPublico");
+                System.out.println(aeropuertos[i].toString());
+            }
+            System.out.println("");
+        }
+    }
+
+    public static void mostrarPatrocinioEmpresas(Aeropuerto aeropuerto[]) {
+        System.out.println("listar Datos de empresas o Subvenciones");
+        System.out.println("========================================");
+        String empresas[];//arreglo de tipo empresa para almacenar las empresas encontradas
+        for (int i = 0; i < aeropuerto.length; i++) {
+            if (aeropuerto[i] instanceof AeropuertoPrivado) {
+                System.out.println("* Aeropuerto Privado: " + aeropuerto[i].getNombre());
+                empresas = ((AeropuertoPrivado) aeropuerto[i]).getListaEmpresas();
+
+                for (int j = 0; j < empresas.length; j++) {
+                    System.out.println("empresa[" + j + "]: " + empresas[j]);
+                }
+            } else {
+                System.out.println("* Aeropuerto Publico: " + aeropuerto[i].getNombre());
+                System.out.println("Subvención: " + ((AeropuertoPublico) aeropuerto[i]).getSubvencion());
+
+            }
+            System.out.println("");
+        }
+    }
+
+    public static Aeropuerto buscarAeropuerto(String nombreAeropuerto, Aeropuerto aeropuertos[]) {
+        Aeropuerto aeropuertoEncontrado = null;
+        for (int i = 0; i < aeropuertos.length; i++) {
+            if (nombreAeropuerto.equals(aeropuertos[i].getNombre())) {
+                aeropuertoEncontrado = aeropuertos[i];
+            }
+        }
+        return aeropuertoEncontrado;
+    }
+
+    public static void mostrarCompanias(Aeropuerto aeropuertoEncontrado) {
+        System.out.println("\nLas Companias del Aeropuerto: " + aeropuertoEncontrado.getNombre());
+        //recorrerar la cantidad de compánia que exista en getNumCompania
+        for (int i = 0; i < aeropuertoEncontrado.getNumCompania(); i++) {
+            System.out.println(aeropuertoEncontrado.getCompania(i).getNombre());//accediendo al interador de compania y por el el método getNombre
+        }
     }
 }
